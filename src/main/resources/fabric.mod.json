@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "inventorymanager",
   "version": "${version}",
-  "name": "Inventorymanager",
+  "name": "Inventory Manager",
   "description": "A Minecraft Fabric client-side mod to revolutionize the inventory.",
   "authors": [
-    "WNTIV"
+    "WNTIV>"
   ],
   "contact": {
     "repo": "https://github.com/wntiv-main/Inventory-Manager"
