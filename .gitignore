@@ -1,5 +1,6 @@
 # User-specific stuff
 .idea/
+.gradle/
 
 *.iml
 *.ipr
@@ -100,7 +101,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-.gradle
 build/
 
 # Ignore Gradle GUI config
