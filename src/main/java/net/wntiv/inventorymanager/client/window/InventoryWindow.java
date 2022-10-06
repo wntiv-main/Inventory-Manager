@@ -1,5 +1,7 @@
 package net.wntiv.inventorymanager.client.window;
 
+import net.wntiv.inventorymanager.client.EventContext;
+
 public abstract class InventoryWindow {
     protected boolean open = false;
     protected final Identifier id;
@@ -18,7 +20,7 @@ public abstract class InventoryWindow {
     public void onOpen(){}
     public void onClose(){}
 
-    public abstract void onSelect();
+    public abstract boolean onSelect(EventContext context);
 
     protected static abstract class Identifier {
         public abstract boolean equals(Identifier id);

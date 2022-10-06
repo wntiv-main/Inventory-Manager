@@ -3,6 +3,8 @@ package net.wntiv.inventorymanager.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.wntiv.inventorymanager.client.render.PlayerInventoryRenderer;
 import net.wntiv.inventorymanager.client.render.WindowRendererManager;
 import net.wntiv.inventorymanager.client.render.generic.Colored9x3Renderer;
 import net.wntiv.inventorymanager.client.render.generic.Generic9x3Renderer;
@@ -10,8 +12,11 @@ import net.wntiv.inventorymanager.client.window.WindowProviderManager;
 import net.wntiv.inventorymanager.client.window.block.BlockWindowProvider;
 import net.wntiv.inventorymanager.client.window.block.Colored9x3Window;
 import net.wntiv.inventorymanager.client.window.block.Generic9x3Window;
+import net.wntiv.inventorymanager.client.window.entity.EntityWindowProvider;
 import net.wntiv.inventorymanager.client.window.item.ItemWindow;
 import net.wntiv.inventorymanager.client.window.item.ItemWindowProvider;
+import net.wntiv.inventorymanager.client.window.player.PlayerInventoryProvider;
+import net.wntiv.inventorymanager.client.window.player.PlayerInventoryWindow;
 
 @Environment(EnvType.CLIENT)
 public class InventoryManagerClient implements ClientModInitializer {
@@ -19,13 +24,14 @@ public class InventoryManagerClient implements ClientModInitializer {
     public static WindowProviderManager windowProvider = new WindowProviderManager();
     @Override
     public void onInitializeClient() {
-        // Set up renderers
-        Generic9x3Renderer generic9x3 = new Generic9x3Renderer();
-        Colored9x3Renderer colored9x3 = new Colored9x3Renderer();
-        renderer.register(ItemWindow.class, generic9x3);
-        renderer.register(Generic9x3Window.class, generic9x3);
-        renderer.register(Colored9x3Window.class, colored9x3);
-        windowProvider.register(new ItemWindowProvider());
-        windowProvider.register(new BlockWindowProvider());
+        renderer.register(ItemWindow.class);
+        renderer.register(PlayerInventoryWindow.class, PlayerInventoryRenderer.class);
+        renderer.register(Generic9x3Window.class, Generic9x3Renderer.class);
+        renderer.register(Colored9x3Window.class, Colored9x3Renderer.class);
+        windowProvider.register(ItemWindowProvider.class);
+        windowProvider.register(BlockWindowProvider.class);
+        windowProvider.register(PlayerInventoryProvider.class);
+        windowProvider.register(EntityWindowProvider.class);
+        ClientTickEvents.END_CLIENT_TICK.register(_1 -> windowProvider.update());
     }
 }
