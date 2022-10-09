@@ -11,6 +11,6 @@ public abstract class InventoryWindowProvider {
         this.manager = manager;
     }
 
-    public abstract List<? extends InventoryWindow> getWindows(EventContext context);
-    public void update(WindowProviderManager manager) {}
+    public void update(EventContext context) {}
+    public void onOpenScreen(EventContext context) {}
 }

@@ -2,6 +2,7 @@ package net.wntiv.inventorymanager.client.window.item;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.wntiv.inventorymanager.client.EventContext;
 import net.wntiv.inventorymanager.client.render.WindowRenderer;
 import net.wntiv.inventorymanager.client.render.WindowRendererManager;
@@ -24,7 +25,7 @@ public class ItemWindow extends InventoryWindow implements PerInstanceRenderer {
 
     @Override
     public Class<? extends WindowRenderer> getRendererClass(WindowRendererManager manager) {
-        return manager.getRendererFor(BlockWindowProvider.windowFromBlock(((BlockItem)fromStack.getItem()).getBlock()));
+        return manager.getRendererForWindow(BlockWindowProvider.windowFromBlock(((BlockItem)fromStack.getItem()).getBlock()));
     }
 
     protected static class ItemStackId extends Identifier {
@@ -37,6 +38,12 @@ public class ItemWindow extends InventoryWindow implements PerInstanceRenderer {
         @Override
         public boolean equals(Identifier id) {
             return id instanceof ItemStackId && ItemStack.areEqual(((ItemStackId) id).identity, identity);
+        }
+
+        @Override
+        public int hashCode() {
+            NbtCompound tag = identity.getTag();
+            return identity.getItem().hashCode() ^ identity.getCount() ^ (tag == null ? 0 : tag.hashCode());
         }
     }
 }

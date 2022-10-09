@@ -1,12 +1,11 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "net.wntiv.inventorymanager.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
-  "client": ["GameRendererMixin", "ScreenMixin"],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.wntiv.inventorymanager.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": ["ScreenHandlerMixin", "SlotMixin"],
+	"client": ["GameRendererInvoker", "GameRendererMixin", "HandledScreenInvoker", "InGameHudMixin", "ScreenMixin"],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

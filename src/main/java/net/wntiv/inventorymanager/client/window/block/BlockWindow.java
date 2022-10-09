@@ -34,5 +34,10 @@ public abstract class BlockWindow extends InventoryWindow {
             BlockId other = (BlockId) id;
             return other.pos.equals(pos) && other.blockAt.is(blockAt);
         }
+
+        @Override
+        public int hashCode() {
+            return pos.hashCode() ^ blockAt.hashCode();
+        }
     }
 }

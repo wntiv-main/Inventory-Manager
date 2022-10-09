@@ -18,15 +18,13 @@ public class ItemWindowProvider extends InventoryWindowProvider {
     }
 
     @Override
-    public List<? extends InventoryWindow> getWindows(EventContext context) {
-        List<InventoryWindow> result = new ArrayList<>();
+    public void onOpenScreen(EventContext context) {
         context.player.currentScreenHandler.getStacks().forEach(itemStack -> {
             Item item = itemStack.getItem();
             if(item instanceof BlockItem && ((BlockItem) item).getBlock().hasBlockEntity() &&
                     ((BlockEntityProvider)((BlockItem) item).getBlock()).createBlockEntity(context.world) instanceof ScreenHandlerFactory) {
-                result.add(new ItemWindow(itemStack));
+//                manager.addWindow(new ItemWindow(itemStack));
             }
         });
-        return result;
     }
 }

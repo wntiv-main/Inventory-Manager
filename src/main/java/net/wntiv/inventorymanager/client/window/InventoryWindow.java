@@ -24,5 +24,8 @@ public abstract class InventoryWindow {
 
     protected static abstract class Identifier {
         public abstract boolean equals(Identifier id);
+
+        @Override
+        public abstract int hashCode();
     }
 }

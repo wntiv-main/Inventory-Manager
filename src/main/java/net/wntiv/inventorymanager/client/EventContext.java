@@ -7,9 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EventContext {
     public final MinecraftClient client;
-    @NotNull
     public final ClientPlayerEntity player;
-    @NotNull
     public final ClientWorld world;
 
     public EventContext(MinecraftClient client) {

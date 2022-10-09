@@ -1,12 +1,9 @@
-package net.wntiv.inventorymanager.client.window.player;
+package net.wntiv.inventorymanager.client.window.entity.player;
 
 import net.wntiv.inventorymanager.client.EventContext;
-import net.wntiv.inventorymanager.client.window.InventoryWindow;
 import net.wntiv.inventorymanager.client.window.InventoryWindowProvider;
 import net.wntiv.inventorymanager.client.window.WindowProviderManager;
 
-import java.util.Collections;
-import java.util.List;
 
 public class PlayerInventoryProvider extends InventoryWindowProvider {
     public PlayerInventoryProvider(WindowProviderManager manager) {
@@ -14,7 +11,9 @@ public class PlayerInventoryProvider extends InventoryWindowProvider {
     }
 
     @Override
-    public List<? extends InventoryWindow> getWindows(EventContext context) {
-        return Collections.singletonList(new PlayerInventoryWindow(context.player));
+    public void onOpenScreen(EventContext context) {
+        super.onOpenScreen(context);
+        if(context.client.player != null)
+            manager.addWindow(new PlayerInventoryWindow(context.player));
     }
 }
